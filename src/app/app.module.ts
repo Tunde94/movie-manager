@@ -10,13 +10,15 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateEditMovieComponent } from './create-edit-movie/create-edit-movie.component';
+import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     DashboardComponent,
-    CreateEditMovieComponent
+    CreateEditMovieComponent,
+    MoviePreviewComponent
   ],
   imports: [
     BrowserModule,
