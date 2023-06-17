@@ -1,0 +1,13 @@
+.movie-card{
+  max-width: 400px;
+  margin: 16px;
+  /*  margin se refera distanta din exterior din sus-jos-stanga-dreapta*/
+  padding: 16px;
+  /*  padding se refera la distanta din interior in exterior*/
+  background-color: cadetblue;
+}
+.movie-title{
+  font-size: 18px;
+  font-family: "Bodoni MT Poster Compressed";
+  font-weight: bold;
+}

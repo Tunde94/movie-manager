@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
+import {AuthService} from "./auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -17,15 +19,18 @@ export class AuthComponent {
   age: number = 25.5;
   isTrue: boolean = false;
 
-  public onLogIn(): void {
-    let text = '';
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
-    switch (text) {
-      case 'login':
-        break;
-      case 'register':
-        break;
-    }
+  public onLogIn(): void {
+    let email = this.emailFormControl.getRawValue()!;
+    let password = this.passwordFormControl.getRawValue()!;
+    this.authService.logIn(email,password).subscribe((response: any) => {
+      console.log(response);
+      alert(response.message);
+      this.router.navigate(["/", "dashboard"]);
+      // this.router.navigateByUrl("/dashboard");
+    })
   }
   public onRegister(): void{
     let email = this.emailFormControl.getRawValue()!;
@@ -33,7 +38,11 @@ export class AuthComponent {
     let reTypePassword = this.reTypePasswordFormControl.getRawValue()!;
 
     if(password == reTypePassword){
-      console.log("Parolele se potrivesc");
+      this.authService.register(email,password,reTypePassword).subscribe((response: any) => {
+        console.log(response);
+        alert(response.message);
+        this.viewType = "login";
+      })
     }
     else {
       alert("Parolele nu se potrivesc!");

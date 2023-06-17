@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {MovieService} from "../movie.service";
 
 @Component({
   selector: 'app-create-edit-movie',
@@ -9,12 +10,14 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class CreateEditMovieComponent {
 
   movieFormGroup: FormGroup = new FormGroup({
-    titleFormControl : new FormControl('Pic', [Validators.required]),
+    titleFormControl : new FormControl('', [Validators.required]),
     directorFormControl : new FormControl('', [Validators.required]),
     yearFormControl : new FormControl('', [Validators.required]),
     descriptionFormControl : new FormControl('', [Validators.required]),
   })
 
+  constructor(private movieService: MovieService) {
+  }
   public onSave(): void{
     // let title = this.titleFormControl.getRawValue()!;
     // //! - reprezinta faptul ca valoarea e diferita de null,
@@ -38,6 +41,25 @@ export class CreateEditMovieComponent {
     // let data = "10.06.2023"; - va da eroare de definire, daca vrem sa reinitializam variabila data, nu definim cu let din nou
 
     console.log(this.movieFormGroup.value);
+    let movie = {
+      id: "",
+      title: this.movieFormGroup.value.titleFormControl,
+      description: this.movieFormGroup.value.descriptionFormControl,
+      year: this.movieFormGroup.value.yearFormControl,
+      director: this.movieFormGroup.value.directorFormControl
+    };
+
+    if(movie.id == "") {
+      this.movieService.createMovie(movie).then((response: any) => {
+        console.log(response);
+        alert(response.message);
+      })
+    } else {
+      this.movieService.updateMovie(movie).then((response: any) => {
+        console.log(response);
+        alert(response.message);
+      })
+    }
 
   }
 

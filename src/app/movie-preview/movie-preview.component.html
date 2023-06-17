@@ -1,0 +1,9 @@
+<mat-card class="movie-card">
+  <!--{} ne ajuta sa afisam valoarea variabilei definita in typescript(.ts), se numeste databinding-->
+  <p class = "movie-title">Title: {{movie.title}}</p>
+  <p>Director:{{movie.director}} </p>
+  <p>Year: {{movie.year}}</p>
+  <p>Description: {{movie.description}}</p>
+  <button mat-raised-button color="primary" (click) = "onDelete()">Delete</button>
+</mat-card>
+
